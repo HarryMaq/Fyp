@@ -1,0 +1,44 @@
+﻿@model List<BusTrackingSystem.Models.Bus>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="container">
+        <div class="well-lg">
+            <h1 class="well-lg">All Buses</h1>
+        </div>
+    </div>
+    <div class="container">
+        <br /><br /><br />
+        <div class="col-md-2">
+
+        </div>
+
+        <div class="col-md-8">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <td>Bus Id</td>
+                    <td>RegNo</td>
+                    <td>RouteId</td>
+                    <td>Seats</td>
+                    <td>DriverId</td>
+                </tr>
+                @foreach (var bus in Model)
+                {
+                    <tr>
+                        <td>@bus.Id</td>
+                        <td>@bus.RegNo</td>
+                        <td>@bus.RouteId</td>
+                        <td>@bus.Seats</td>
+                        <td>@bus.DriverId</td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <div class="col-md-2">
+
+        </div>
+    </div>
+
+</div>

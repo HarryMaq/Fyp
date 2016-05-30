@@ -1,0 +1,20 @@
+﻿@model BusTrackingSystem.Models.Bus
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; ;
+}
+<h2>Bus Added Succesfully</h2>
+<div style="margin-left:280px;">
+    <table class="table-responsive table-bordered table-striped" style="width:800px;">
+        <tr><th>Id</th><th>Reg No</th> <th>No. of Seats</th> <th>Route Id</th> <th>Driver Id</th> </tr>
+
+        <tr>
+            <td>@Model.Id</td>
+            <td>@Model.RegNo</td>
+            <td>@Model.Seats</td>
+            <td>@Model.RouteId</td>
+            <td>@Model.DriverId</td>
+        </tr>
+
+    </table>
+</div>
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c09ba1e0deeb464996d8cabb2a79ced8" Name="Diagram1">
+        <EntityTypeShape EntityType="myDbModel.Admin" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="myDbModel.Bus" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="myDbModel.Driver" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="myDbModel.Location" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="myDbModel.RouteDetail" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="myDbModel.Route" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="myDbModel.Stop" Width="1.5" PointX="0.875" PointY="2.625" IsExpanded="true" />
+        <AssociationConnector Association="myDbModel.FK_Bus_Driver" ManuallyRouted="false" />
+        <AssociationConnector Association="myDbModel.FK_Bus_Routes" ManuallyRouted="false" />
+        <AssociationConnector Association="myDbModel.FK_RouteDetails_Routes" ManuallyRouted="false" />
+        <AssociationConnector Association="myDbModel.FK_RouteDetails_Stops" ManuallyRouted="false" />
+        <AssociationConnector Association="myDbModel.FK_Routes_EndStop" ManuallyRouted="false" />
+        <AssociationConnector Association="myDbModel.FK_Routes_StartStop" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

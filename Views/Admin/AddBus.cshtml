@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+@model BusTrackingSystem.Models.Bus
+@{
+    //Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";; 
+}
+<script src="~/js/bootstrap.min.js"></script>
+<script src="~/js/jquery-1.11.3.min.js"></script>
+<br /><br /><br />
+
+
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-6">
+        <div class="container" style="padding-top:10px;">
+            <div class="panel panel-default col-md-8">
+                <div class="panel-heading">Add New Bus</div>
+                <div class="panel-body">
+                    <form action="/Admin/BusAdded" method="post" id="addBusForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="RegNo" class="control-label">Enter Bus Registeration Number:</label>
+                                <input type="text" class="form-control" name="RegNo" id="RegNo" placeholder="Registeration Number" required />
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top:12px;">
+                            <div class="col-md-6">
+                                <label for="Seats" class="control-label">Enter number of seats:</label>
+                                <input type="text" class="form-control" id="Seats" name="Seats" placeholder="No. of seats" required />
+                            </div>
+                        </div>
+                        <input type="hidden" name="RouteId" id="RouteId" />
+                        <div class="row" style="margin-top:12px;">
+                            <div class="col-md-6">
+                                <label class="control-label">Select Route</label>
+                                @{List<SelectListItem> routeName = ((List<SelectListItem>)Session["routeNames"]);}
+
+                                <h2>Select Route</h2>
+                                From   @Html.DropDownList("startingPoint", routeName, "Select Starting Point", new { @class = "form-control", id = "startRoute", required = "required" })
+                                <br />
+                                To  @Html.DropDownList("endingPoint", routeName, "Select Ending Point", new { @class = "form-control", id = "endRoute", required = "required" })
+                                
+                                <div id="checking">Checking...</div>
+
+                                @{List<SelectListItem> drivers = ((List<SelectListItem>)Session["driverNames"]);}
+                                <br />
+                                <h2>Select Driver</h2>
+                                @Html.DropDownList("DriverId", drivers, "Select Driver", new { @class = "form-control", id = "DriverId", required="required" })
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Add Bus" class="form-control btn btn-default" />
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+<script src="~/js/jquery-1.11.3.min.js"></script>
+    <script>
+    
+            $(document).ready(function () {
+
+                $('#checking').hide();
+                $('#endRoute').change(f1);
+                $('#startRoute').change(f1);
+                $('#addBusForm').submit(function () {
+                    if ($('#RouteId').val() == null || $('#RouteId').val() == "")
+                    {
+                        alert("This Route Does not Exists!!!");
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                });
+
+
+
+                $('#checkButton').click();
+                function f1() {
+                
+
+                    var startRoute = $("#startRoute").val();
+                    var endRoute = $("#endRoute").val();
+                    $('#checking').show();
+
+                    $.getJSON("/Admin/CheckRouteAvailability?startRoute=" + startRoute + "&&endRoute=" + endRoute, function (data) {
+                        if (data) {
+                            $('#checking').html("Route Exists");
+                            $('#checking').show();
+                            $('#RouteId').val(data);
+                        }
+                        else {
+                            $('#checking').html("Route Does not exists");
+                            $('#checking').show();
+                            $('#RouteId').val(null);
+                        }
+                    });
+
+
+
+
+                }
+                
+            });
+        </script>
+    

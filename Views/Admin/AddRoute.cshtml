@@ -1,0 +1,113 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br /><br /><br />
+
+<br /><br /><br />
+<div class="container">
+    <div class="col-md-7" style="background-color: #f7f7f7; height:600px; width:50%">
+        <div class="row">
+            <label style="font-size:30px;" id="label"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Add New Route</label>
+        </div>
+        <br /><br />        <div>
+            <form action="~/Admin/RouteAdded" method="post" id="submitDetails">
+                <div class="form-group">
+                    <label for="StartingStop">Starting Stop</label>
+                    @{List<SelectListItem> routeName = ((List<SelectListItem>)Session["routeNames"]);}
+                    
+                        @Html.DropDownList("startingRoute", routeName, "Select Starting Point", new { @class = "form-control"})
+
+                    
+                    
+                </div>
+
+                <div id="routes" style="display:none">
+                    @Html.DropDownList("routeNames", routeName, "Select Point", new { @class = "form-control" })
+
+                </div>l
+
+
+                <br />
+                <div class="form-group">
+
+                    <label for="EndingStop">Ending Stop</label>
+                    @Html.DropDownList("endingRoute", routeName, "Select Ending Point",new { @class="form-control"})
+
+                </div>
+                <div class="form-group">
+                    <label for="number"> How many stops you want to add in this route ???</label>
+                    <input type="text" class="form-control" id="num" name="num" placeholder="Number of Stops">
+                    <input type="button" id="btn" style="width:100px; " value="Add">
+                </div>
+
+                <br />
+
+                <div id="dv" class="form-group">
+                    
+                </div>
+
+
+
+                <button type="submit" class="btn btn-primary" style="margin-left:100px; width:100px; height:30px;">Add Route</button>
+            </form>
+        </div>
+    </div>
+    <div id="hiddenRoute" >
+
+    </div>
+    @section Scripts {
+        <script>
+            $(document).ready(function () {
+                $("#dv").hide();
+                $("#btn").click(function () {
+                    var i = 0;
+                    var count = $("#num").val();
+                    
+                    $("#dv").html('');
+                    while (i++ < count)
+                    {
+                        
+                        $("#dv").append('Stop# ' + i + ': &nbsp; ');
+                        $("#dv").append($("#routes").html());
+                        $("#dv").append('<input type="text"placeholder="Timing" name="Time" class=\'form-control\' required /><br /><br />')
+                    }
+                    $("#dv").show();
+                });
+
+                $("#submitDetails").click(function () {
+                    if ($("#routeNames").value() == "")
+                        return false;
+                    else
+                        return true;
+                });
+
+            });
+        </script>
+    }
+
+    <div class="col-lg-4 col-lg-offset-1 right" style="background-color: #f7f7f7;">
+        <label style="font-size:30px;"> Add New Stop</label>
+        <form action="~/Admin/AddStop" method="post">
+            <div class="form-group">
+                <label for="inputEmail">Name</label>
+                <input type="text" class="form-control" id="n" name="name" placeholder="Bus Stop Name">
+            </div>
+
+            <br />
+            <div class="form-group">
+
+                <label for="Longitude">Longitude</label>
+                <input type="text" class="form-control" id="long" name="longitude" placeholder="Longitude">
+
+            </div>
+            <br />
+            <div class="form-group">
+                <label for="Latitude">Latitude</label>
+                <input type="text" class="form-control" id="lat" name="latitude" placeholder="Latitude">
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="margin-left:100px">Add Stop</button>
+        </form>
+    </div>
+</div>
